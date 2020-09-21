@@ -1,3 +1,10 @@
+Cellular Automata and Conway's "Game of Life"
+
+What is the project?
+What problem does it solve?
+Exceptional difficulties and solutions, if any.
+TODO list/wishlist. What do you want to add to it if you have more time?
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
