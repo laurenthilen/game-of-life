@@ -15,6 +15,15 @@ const emptyGrid = () => {
     return cellGrid;
 };
 
+function pickColor() {           
+    const colors = ['#ff184c', '#ff577d', '#ffccdc','#0a9cf5', '#003062']; 
+      
+    // selecting random color 
+    const randomColor = colors[Math.floor( 
+            Math.random() * colors.length)]; 
+      
+    return randomColor;
+}  
 
 const Grid = () => {
     const [grid, setGrid] = useState(() => {
@@ -63,14 +72,14 @@ const Grid = () => {
                             }
                         })
                         // if neighbors is less than or greater than 3, grid position dies
-                        if (currentGridValue[i][j] === 1 && neighbors < 2 || neighbors > 3) {
+                        if (currentGridValue[i][j] === 1 && (neighbors < 2 || neighbors > 3)) {
                             valid = true;
                             gridCopy[i][j] = 0;
                         // if current grid is dead and has 3 neighbors, it's alive
                         } else if (currentGridValue[i][j] === 0 && neighbors === 3) {
                             valid = true;
                             gridCopy[i][j] = 1;
-                        } 
+                        }
                     }
                 }
                 if (valid) {
@@ -85,31 +94,30 @@ const Grid = () => {
     return (
         // added fragment bc you can't return more than one child on same level
         <> 
-            <h3>Generation: {generation}</h3>
-            <button 
-                onClick={() => {
-                    setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
-                    // only run if we're currently in a starting state if we're not running
-                    if (!running) {
-                        runningRef.current = true;
-                        runSimulation();
-                    }
-                }}
-            >
-                {running ? "Stop" : "Start"} 
-            </button>
-            <button 
-                onClick={() => {
-                    setGrid(emptyGrid());
-                    setGeneration(0);
-                }}
-            >Clear
-            </button>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
+                <h3>Generation: {generation}</h3>
+                <button 
+                    onClick={() => {
+                        setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
+                        // only run if we're currently in a starting state if we're not running
+                        if (!running) {
+                            runningRef.current = true;
+                            runSimulation();
+                        }
+                    }}
+                >
+                    {running ? "Stop" : "Start"} 
+                </button>
+                <button 
+                    onClick={() => {
+                        setGrid(emptyGrid());
+                        setGeneration(0);
+                    }}
+                >Clear
+                </button>
+            </div>
 
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${numColumns}, 25px)`
-            }}>
+            <div style={{display: 'grid', gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
                 {grid.map((rows, i) => 
                     rows.map((col, j) => (
                         <div 
@@ -123,7 +131,7 @@ const Grid = () => {
                             style={{ 
                                 width: 25, 
                                 height: 25, 
-                                backgroundColor: grid[i][j] ? '#C70039' : undefined, // if alive, color is red
+                                backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
                                 border: 'solid 1px black'
                             }} 
                         />

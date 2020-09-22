@@ -12,7 +12,7 @@ const Rules = () => {
           <li>Any live cell with fewer than two live neighbors dies</li>
           <li>Any live cell with two or three live neighbors lives on to the next generation</li>
           <li>Any live cell with more than three live neighbors dies</li>
-          <li>Any dead cell with exactly three live neighbours becomes a live cell</li>
+          <li>Any dead cell with exactly three live neighbors becomes a live cell</li>
         </ul>
       </ul>
     </div>
