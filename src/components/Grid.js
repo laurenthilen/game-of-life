@@ -23,6 +23,8 @@ const Grid = () => {
 
     const [running, setRunning] = useState(false);
 
+    const [generation, setGeneration] = useState(0);
+
     const runningRef = useRef(running); // adding reference to keep fn up to date (we're accessing running state which changes but function does not change)
     runningRef.current = running // current value of ref is whatever the value of running is
 
@@ -34,6 +36,7 @@ const Grid = () => {
         }
         // mutate values in grid
         setGrid((currentGridValue) => {
+            let valid = false;
             // produce fn generates a new grid and updates the setGrid
             return produce(currentGridValue, gridCopy => {
                 for (let i = 0; i < numRows; i++) {
@@ -60,13 +63,19 @@ const Grid = () => {
                             }
                         })
                         // if neighbors is less than or greater than 3, grid position dies
-                        if (neighbors < 2 || neighbors > 3) {
+                        if (currentGridValue[i][j] === 1 && neighbors < 2 || neighbors > 3) {
+                            valid = true;
                             gridCopy[i][j] = 0;
                         // if current grid is dead and has 3 neighbors, it's alive
                         } else if (currentGridValue[i][j] === 0 && neighbors === 3) {
+                            valid = true;
                             gridCopy[i][j] = 1;
-                        }
+                        } 
                     }
+                }
+                if (valid) {
+                    setGeneration(prevState => (prevState += 1));
+                    valid = false;
                 }
             });
         });
@@ -76,6 +85,7 @@ const Grid = () => {
     return (
         // added fragment bc you can't return more than one child on same level
         <> 
+            <h3>Generation: {generation}</h3>
             <button 
                 onClick={() => {
                     setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
@@ -91,6 +101,7 @@ const Grid = () => {
             <button 
                 onClick={() => {
                     setGrid(emptyGrid());
+                    setGeneration(0);
                 }}
             >Clear
             </button>
