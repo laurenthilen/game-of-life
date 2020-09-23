@@ -63,26 +63,26 @@ const heartGrid = () => {
         cellGrid[x][y] = 0; // add to the cellGrid array - creating an array of y's in each array
       }
     }
-    cellGrid[0][2] = 1;
-    cellGrid[0][3] = 1;
-    cellGrid[0][7] = 1;
-    cellGrid[0][8] = 1;
-    cellGrid[1][1] = 1;
-    cellGrid[1][4] = 1;
-    cellGrid[1][6] = 1;
-    cellGrid[1][9] = 1;
+    cellGrid[1][2] = 1;
+    cellGrid[1][3] = 1;
+    cellGrid[1][7] = 1;
+    cellGrid[1][8] = 1;
     cellGrid[2][1] = 1;
-    cellGrid[2][5] = 1;
+    cellGrid[2][4] = 1;
+    cellGrid[2][6] = 1;
     cellGrid[2][9] = 1;
     cellGrid[3][1] = 1;
+    cellGrid[3][5] = 1;
     cellGrid[3][9] = 1;
-    cellGrid[4][2] = 1;
-    cellGrid[4][8] = 1;
-    cellGrid[5][3] = 1;
-    cellGrid[5][7] = 1;
-    cellGrid[6][4] = 1;
-    cellGrid[6][6] = 1;
-    cellGrid[7][5] = 1;
+    cellGrid[4][1] = 1;
+    cellGrid[4][9] = 1;
+    cellGrid[5][2] = 1;
+    cellGrid[5][8] = 1;
+    cellGrid[6][3] = 1;
+    cellGrid[6][7] = 1;
+    cellGrid[7][4] = 1;
+    cellGrid[7][6] = 1;
+    cellGrid[8][5] = 1;
     return cellGrid;
 };
 
@@ -155,74 +155,78 @@ const Grid = () => {
 
     return (
         // added fragment bc you can't return more than one child on same level
-        <>  
-            <h3>Generation: {generation}</h3>
-            <button 
-                onClick={() => {
-                    setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
-                    // only run if we're currently in a starting state if we're not running
-                    if (!running) {
-                        runningRef.current = true;
-                        runSimulation();
-                    }
-                }}
-            >
-                {running ? "Stop" : "Start"} 
-            </button>
-            <button
-                onClick={() => {
-                    setGrid(randomizeGrid());
-                    setGeneration(0);
-                }}
-            >
-                Randomize
-            </button>
-            <button
-                onClick={() => {
-                    setGrid(stripedConfig());
-                    setGeneration(0);
-                }}
-            >
-                Striped Grid
-            </button>
-            <button
-                onClick={() => {
-                    setGrid(heartGrid());
-                    setGeneration(0);
-                }}
-            >
-                Heart Grid
-            </button>
-            <button 
-                onClick={() => {
-                    setGrid(emptyGrid());
-                    setGeneration(0);
-                }}
-            >Clear
-            </button>
-    
-            <div style={{display: 'grid', gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
-                {grid.map((rows, i) => 
-                    rows.map((col, j) => (
-                        <div 
-                            key={`${i}-${j}`}
-                            onClick={() => {
-                                const newGrid = produce(grid, gridCopy => {
-                                    gridCopy[i][j] = gridCopy[i][j] ? 0 : 1; // toggle - if it's alive, we'll make it dead
-                                });
-                                setGrid(newGrid);
-                            }}
-                            style={{ 
-                                width: 25, 
-                                height: 25, 
-                                backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
-                                border: 'solid 1px black'
-                            }} 
-                        />
-                    )) 
-                )}
-            </div>
-        </>
+        <div style={{display: "flex"}}>  
+            <section style={{display: "flex", alignContent: "space-evenly", flexDirection: "column", width: "30%"}}>
+                <h3>Generations: {generation}</h3>
+                <button 
+                    onClick={() => {
+                        setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
+                        // only run if we're currently in a starting state if we're not running
+                        if (!running) {
+                            runningRef.current = true;
+                            runSimulation();
+                        }
+                    }}
+                >
+                    {running ? "Stop" : "Start"} 
+                </button>
+                <button
+                    onClick={() => {
+                        setGrid(randomizeGrid());
+                        setGeneration(0);
+                    }}
+                >
+                    Randomize
+                </button>
+                <button
+                    onClick={() => {
+                        setGrid(stripedConfig());
+                        setGeneration(0);
+                    }}
+                >
+                    Striped Configuration
+                </button>
+                <button
+                    onClick={() => {
+                        setGrid(heartGrid());
+                        setGeneration(0);
+                    }}
+                >
+                    Heart Configuration
+                </button>
+                <button 
+                    onClick={() => {
+                        setGrid(emptyGrid());
+                        setGeneration(0);
+                    }}
+                >Clear
+                </button>
+            </section>
+
+            <section style={{display: "flex", width: "70%", justifyContent: "flex-end", marginLeft: "2%"}}>
+                <div style={{display: 'grid', gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
+                    {grid.map((rows, i) => 
+                        rows.map((col, j) => (
+                            <div 
+                                key={`${i}-${j}`}
+                                onClick={() => {
+                                    const newGrid = produce(grid, gridCopy => {
+                                        gridCopy[i][j] = gridCopy[i][j] ? 0 : 1; // toggle - if it's alive, we'll make it dead
+                                    });
+                                    setGrid(newGrid);
+                                }}
+                                style={{ 
+                                    width: 25, 
+                                    height: 25, 
+                                    backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
+                                    border: 'solid 1px black'
+                                }} 
+                            />
+                        )) 
+                    )}
+                </div>
+            </section>
+        </div>
     );
 }
 export default Grid;

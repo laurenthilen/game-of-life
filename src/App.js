@@ -6,8 +6,9 @@ import Rules from "./components/Rules";
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to the Game of Life!</h1>
+      <h1>Welcome to Conway's Game of Life!</h1>
       <Rules />
+      <br />
       <Grid />
     </div>
   );
