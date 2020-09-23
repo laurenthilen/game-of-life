@@ -15,7 +15,7 @@ const emptyGrid = () => {
     return cellGrid;
 };
 
-function pickColor() {           
+const pickColor = () => {           
     const colors = ['#ff184c', '#ff577d', '#ffccdc','#0a9cf5', '#003062']; 
       
     // selecting random color 
@@ -24,6 +24,18 @@ function pickColor() {
       
     return randomColor;
 }  
+
+const randomizeGrid = () => {
+    let cellGrid = [];
+    for (let y = 0; y < numRows; y++) {
+      cellGrid[y] = []; // create an array of all of x axis of the board
+      for (let x = 0; x < numColumns; x++) {
+        cellGrid[y][x] = Math.round(Math.random()); // add to the cellGrid array - creating an array of random y's in each array
+      }
+    }
+    return cellGrid;
+
+}
 
 const Grid = () => {
     const [grid, setGrid] = useState(() => {
@@ -82,10 +94,11 @@ const Grid = () => {
                         }
                     }
                 }
+                // add to generation if state changed
                 if (valid) {
                     setGeneration(prevState => (prevState += 1));
                     valid = false;
-                }
+                } 
             });
         });
         setTimeout(runSimulation, 100); // call again in 1/10 sec
@@ -93,30 +106,36 @@ const Grid = () => {
 
     return (
         // added fragment bc you can't return more than one child on same level
-        <> 
-            <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
-                <h3>Generation: {generation}</h3>
-                <button 
-                    onClick={() => {
-                        setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
-                        // only run if we're currently in a starting state if we're not running
-                        if (!running) {
-                            runningRef.current = true;
-                            runSimulation();
-                        }
-                    }}
-                >
-                    {running ? "Stop" : "Start"} 
-                </button>
-                <button 
-                    onClick={() => {
-                        setGrid(emptyGrid());
-                        setGeneration(0);
-                    }}
-                >Clear
-                </button>
-            </div>
-
+        <>  
+            <h3>Generation: {generation}</h3>
+            <button 
+                onClick={() => {
+                    setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
+                    // only run if we're currently in a starting state if we're not running
+                    if (!running) {
+                        runningRef.current = true;
+                        runSimulation();
+                    }
+                }}
+            >
+                {running ? "Stop" : "Start"} 
+            </button>
+            <button
+                onClick={() => {
+                    setGrid(randomizeGrid());
+                    setGeneration(0);
+                }}
+            >
+                Randomize
+            </button>
+            <button 
+                onClick={() => {
+                    setGrid(emptyGrid());
+                    setGeneration(0);
+                }}
+            >Clear
+            </button>
+    
             <div style={{display: 'grid', gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
                 {grid.map((rows, i) => 
                     rows.map((col, j) => (
