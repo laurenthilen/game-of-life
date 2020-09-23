@@ -37,6 +37,55 @@ const randomizeGrid = () => {
 
 }
 
+const stripedConfig = () => {
+    let cellGrid = [];
+    for (let y = 0; y < numRows; y++) {
+      cellGrid[y] = []; // create an array of all of x axis of the board
+      let check = 0
+      for (let x = 0; x < numColumns; x++) {
+        cellGrid[y][x] = check; // add to the cellGrid array - every other is alive
+        if (check === 0) {
+            check = 1;
+        } else {
+            check = 0;
+        }
+      }
+    }
+    return cellGrid;
+
+}
+
+const heartGrid = () => {
+    let cellGrid = [];
+    for (let x = 0; x < numColumns; x++) {
+      cellGrid[x] = []; // create an array of all of x axis of the board
+      for (let y = 0; y < numRows; y++) {
+        cellGrid[x][y] = 0; // add to the cellGrid array - creating an array of y's in each array
+      }
+    }
+    cellGrid[0][2] = 1;
+    cellGrid[0][3] = 1;
+    cellGrid[0][7] = 1;
+    cellGrid[0][8] = 1;
+    cellGrid[1][1] = 1;
+    cellGrid[1][4] = 1;
+    cellGrid[1][6] = 1;
+    cellGrid[1][9] = 1;
+    cellGrid[2][1] = 1;
+    cellGrid[2][5] = 1;
+    cellGrid[2][9] = 1;
+    cellGrid[3][1] = 1;
+    cellGrid[3][9] = 1;
+    cellGrid[4][2] = 1;
+    cellGrid[4][8] = 1;
+    cellGrid[5][3] = 1;
+    cellGrid[5][7] = 1;
+    cellGrid[6][4] = 1;
+    cellGrid[6][6] = 1;
+    cellGrid[7][5] = 1;
+    return cellGrid;
+};
+
 const Grid = () => {
     const [grid, setGrid] = useState(() => {
         return emptyGrid();
@@ -127,6 +176,22 @@ const Grid = () => {
                 }}
             >
                 Randomize
+            </button>
+            <button
+                onClick={() => {
+                    setGrid(stripedConfig());
+                    setGeneration(0);
+                }}
+            >
+                Striped Grid
+            </button>
+            <button
+                onClick={() => {
+                    setGrid(heartGrid());
+                    setGeneration(0);
+                }}
+            >
+                Heart Grid
             </button>
             <button 
                 onClick={() => {
