@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
+
+import Rules from "./Rules";
 import { emptyGrid, pickColor, randomizeGrid, stripedConfig, heartGrid } from "../presets";
 
 const numRows = 25;
@@ -74,11 +76,23 @@ const Grid = () => {
         setTimeout(runSimulation, 100); // call again in 1/10 sec
     }, []);
 
+    /* Rules */
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
     return (
         // added fragment bc you can't return more than one child on same level
         <div>  
             <section className="controls-container">
                 <div className="main-controls">
+                    <button className="control-btn" onClick={handleOpen}>
+                        Rules
+                    </button>
+                    <Rules open={open} setOpen={setOpen} />
+             
                     <button 
                         className="control-btn"
                         onClick={() => {
