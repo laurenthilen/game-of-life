@@ -76,8 +76,8 @@ const Grid = () => {
 
     return (
         // added fragment bc you can't return more than one child on same level
-        <div style={{display: "flex"}}>  
-            <section style={{display: "flex", alignContent: "space-evenly", flexDirection: "column", width: "30%"}}>
+        <div className="grid">  
+            <section className="controls-container">
                 <h3>Generations: {generation}</h3>
                 <button 
                     onClick={() => {
@@ -124,8 +124,8 @@ const Grid = () => {
                 </button>
             </section>
 
-            <section style={{display: "flex", width: "70%", justifyContent: "flex-end", marginLeft: "2%"}}>
-                <div style={{display: 'grid', gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
+            <section className="grid-container">
+                <div style={{display: "grid", gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
                     {grid.map((rows, i) => 
                         rows.map((col, j) => (
                             <div 
