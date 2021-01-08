@@ -161,7 +161,7 @@ const Grid = () => {
                                 }}
                                 style={{ 
                                     backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
-                                    border: "solid 1px black"
+                                    border: "solid .1px black"
                                 }} 
                                 className="grid-size"
                             />

@@ -1,39 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: "absolute",
-    width: "70%",
+    position: "center",
     borderRadius: "6px",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    margin: "4% 6%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      margin: "8% 2%",
+    }
   },
 }));
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-const getModalStyle = function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const Rules = props => {
   const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
 
   const handleClose = () => {
     props.setOpen(!props.open);
@@ -44,7 +30,7 @@ const Rules = props => {
           open={props.open}
           onClose={handleClose}
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div className={classes.paper}>
           <div className="rules">
             <div>
               <h3>Rules:</h3>

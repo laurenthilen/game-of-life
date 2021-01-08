@@ -5,7 +5,9 @@ import Grid from "./components/Grid";
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Conway's Game of Life!</h1>
+      <header>
+        <h1>Welcome to Conway's Game of Life!</h1>
+      </header>
       <Grid />
     </div>
   );
