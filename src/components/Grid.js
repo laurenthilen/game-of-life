@@ -148,7 +148,7 @@ const Grid = () => {
             </section>
 
             <section className="grid-container">
-                <div style={{display: "grid", gridTemplateColumns: `repeat(${numColumns}, 25px)`}}>
+                <div className="grid">
                     {grid.map((rows, i) => 
                         rows.map((col, j) => (
                             <div 
@@ -160,11 +160,10 @@ const Grid = () => {
                                     setGrid(newGrid);
                                 }}
                                 style={{ 
-                                    width: 25, 
-                                    height: 25, 
                                     backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
-                                    border: 'solid 1px black'
+                                    border: "solid 1px black"
                                 }} 
+                                className="grid-size"
                             />
                         )) 
                     )}

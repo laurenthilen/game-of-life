@@ -58,6 +58,16 @@ button:hover {
     align-items: center;
 }
 
+.grid {
+    display: grid; 
+    grid-template-columns: repeat(25, 25px);
+}
+
+.grid-size {
+    width: 25px;
+    height: 25px;
+}
+
 .rules {
     width: 80%;
 }
@@ -66,9 +76,19 @@ button:hover {
     .main-controls, .configurations {
         width: 70%;
     }
+    .grid {
+        grid-template-columns: repeat(25, 20px);
+    }
+    .grid-size {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 @media only screen and (max-width: 560px) {
+    h1 {
+        font-size: 1.8rem;
+    }
     .main-controls, .configurations {
         width: 100%;
         flex-direction: column;
@@ -82,9 +102,17 @@ button:hover {
         height: auto;
         width: 80%;
         padding: 2% 0;
-        font-size: 1.4rem;
+        margin: 4%;
+        font-size: 1.2rem;
     }
     .grid-container {
         margin-top: 8%;
+    }
+    .grid {
+        grid-template-columns: repeat(25, 12px);
+    }
+    .grid-size {
+        width: 12px;
+        height: 12px;
     }
 }
