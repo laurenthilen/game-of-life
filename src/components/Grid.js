@@ -76,52 +76,61 @@ const Grid = () => {
 
     return (
         // added fragment bc you can't return more than one child on same level
-        <div className="grid">  
+        <div>  
             <section className="controls-container">
-                <h3>Generations: {generation}</h3>
-                <button 
-                    onClick={() => {
-                        setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
-                        // only run if we're currently in a starting state if we're not running
-                        if (!running) {
-                            runningRef.current = true;
-                            runSimulation();
-                        }
-                    }}
-                >
-                    {running ? "Stop" : "Start"} 
-                </button>
-                <button
-                    onClick={() => {
-                        setGrid(randomizeGrid());
-                        setGeneration(0);
-                    }}
-                >
-                    Randomize
-                </button>
-                <button
-                    onClick={() => {
-                        setGrid(stripedConfig());
-                        setGeneration(0);
-                    }}
-                >
-                    Striped Configuration
-                </button>
-                <button
-                    onClick={() => {
-                        setGrid(heartGrid());
-                        setGeneration(0);
-                    }}
-                >
-                    Heart Configuration
-                </button>
-                <button 
-                    onClick={() => {
-                        setGrid(emptyGrid());
-                        setGeneration(0);
-                    }}
-                >Clear
-                </button>
+                <div className="main-controls">
+                    <button 
+                        className="control-btn"
+                        onClick={() => {
+                            setRunning(!running); // runSimulation's first if statement could be false if state update doesn't happen in time so set runningRef to true
+                            // only run if we're currently in a starting state if we're not running
+                            if (!running) {
+                                runningRef.current = true;
+                                runSimulation();
+                            }
+                        }}
+                        >
+                        {running ? "Stop" : "Start"} 
+                    </button>
+                    <button 
+                        className="control-btn"
+                        onClick={() => {
+                            setGrid(emptyGrid());
+                            setGeneration(0);
+                        }}
+                        >Clear
+                    </button>
+                    <h3 className="control">Generations: {generation}</h3>
+                </div>
+                <div className="configurations">
+                    <button 
+                        className="control-btn"
+                        onClick={() => {
+                            setGrid(randomizeGrid());
+                            setGeneration(0);
+                        }}
+                    >
+                        Randomize
+                    </button>
+                    <button
+                        className="control-btn"
+                        onClick={() => {
+                            setGrid(stripedConfig());
+                            setGeneration(0);
+                        }}
+                    >
+                        Stripe
+                    </button>
+                    <button
+                        className="control-btn"
+                        onClick={() => {
+                            setGrid(heartGrid());
+                            setGeneration(0);
+                        }}
+                    >
+                        Heart
+                    </button>
+                </div>
             </section>
 
             <section className="grid-container">
