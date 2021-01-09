@@ -8,20 +8,17 @@ html, body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background-color: rgb(244, 244, 244);
+    background-image: linear-gradient(370deg, rgb(255, 24, 76), #003062);
 }
 
 header {
-    background-color: #003062;
-    padding: 3% 3% 2%;
-    color: rgb(244, 244, 244);
+    background-color: rgb(244, 244, 244, .2);
+    padding: 2% 3% 1%;
 }
 
 h1 {
     text-align: center;
-}
-
-button:hover {
-    background-color: #0a9cf5;
+    color: rgb(244, 244, 244);
 }
 
 .controls-container {
@@ -49,8 +46,8 @@ button:hover {
 .control-btn {
     background-color: rgb(255, 24, 76);
     border: 2px solid rgb(232, 20, 69);
-    box-shadow: 0 -1px 0 #e0e0e0, 0 0 1px rgba(216, 216, 216, 0.12),
-    1px 2px 4px rgba(216, 216, 216);
+    box-shadow: 0 -1px 0 #003062, 0 0 1px rgba(216, 216, 216, 0.12),
+    1px 2px 4px #003062;
     color: rgb(244, 244, 244);
 }
 
@@ -59,7 +56,7 @@ button:hover {
 }
 
 .grid-container {
-    margin-bottom: 10%;
+    padding-bottom: 10%;
     display: flex; 
     justify-content: center; 
     align-items: center;
@@ -68,7 +65,7 @@ button:hover {
 .grid {
     display: grid; 
     grid-template-columns: repeat(25, 25px);
-    border: .5px solid black;
+    border: .5px solid rgb(244, 244, 244, .7);
 }
 
 .grid-size {
@@ -100,6 +97,7 @@ button:hover {
     }
     .control {
         order: -1;
+        font-size: 1.4rem;
     }
     .control-btn, .control {
         border-radius: 4px;

@@ -114,7 +114,7 @@ const Grid = () => {
                         }}
                         >Clear
                     </button>
-                    <h3 className="control">Generations: {generation}</h3>
+                    <h1 className="control">Generations: {generation}</h1>
                 </div>
                 <div className="configurations">
                     <button 
@@ -161,7 +161,7 @@ const Grid = () => {
                                 }}
                                 style={{ 
                                     backgroundColor: grid[i][j] ? pickColor() : undefined, // if alive, color is red
-                                    border: "solid .1px black"
+                                    border: "solid .1px rgb(244, 244, 244, .7)"
                                 }} 
                                 className="grid-size"
                             />
