@@ -91,7 +91,6 @@ h1 {
         font-size: 1.8rem;
     }
     .main-controls, .configurations {
-        width: 100%;
         flex-direction: column;
         align-items: center;
     }
@@ -102,11 +101,12 @@ h1 {
     .control-btn, .control {
         border-radius: 4px;
         height: auto;
-        width: 60%;
+        width: 80%;
         padding: 2% 0;
         margin: 3% 0;
     }
     .grid-container {
+        width: 100%;
         margin-top: 8%;
     }
     .grid {
